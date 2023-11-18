@@ -31,32 +31,37 @@ var timeSlots = [
     "2pm",
     "3pm",
     "4pm",
-    "5pm",
+    "5pm"
 ]
 
 function saveTask() {
     console.log($(this))
         // get something unique to use as the key for every button (dom traversal)
-        //get the value to save (what is written in the input textArea)
+        //get the value to save (what is written in the input textArea
         //save that to local stroage
+    var uniqueKey = $(this).siblings('h2').text().trim();
+    var taskDescription = $(this).siblings('textarea').val();
+    localStorage.setItem(uniqueKey, taskDescription);
 }
-for (let i = 0; i < timeSlots.length; i++) {
-    var section = $('<section>')
-    var timeBlock = $('<h2>').text(timeSlots[i])
-    var textArea = $('<textarea>')
-    var button = $('<button>').text("Save")
-    button.click(saveTask)
-    section.append(timeBlock)
-    section.append(textArea)
-    section.append(button)
-    $(".container").append(section)
+
+function createElement() {
+    for (let i = 0; i < timeSlots.length; i++) {
+        var section = $('<section>')
+        var timeBlock = $('<h2>').text(timeSlots[i])
+        var textArea = $('<textarea>')
+        var button = $('<button>').text("Save")
+        button.click(saveTask)
+        section.append(timeBlock)
+        section.append(textArea)
+        section.append(button)
+        $(".container").append(section)
+    }
 }
+
 // only strings and functions can be added to jquery elements
 
 // function can be added to jquery elements
 // * Display the current day at the top of the calender when a user opens the planner.
-
-$('#currentDay');
 
 // * Present timeblocks for standard business hours when the user scrolls down.
 

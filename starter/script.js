@@ -38,7 +38,7 @@ function saveTask() {
     console.log($(this))
         // get something unique to use as the key for every button (dom traversal)
         //get the value to save (what is written in the input textArea
-        //save that to local stroage
+        //save this to local stroage
     var uniqueKey = $(this).siblings('h2').text().trim();
     var taskDescription = $(this).siblings('textarea').val();
     localStorage.setItem(uniqueKey, taskDescription);
@@ -65,7 +65,7 @@ $("#currentDay").text(currentDate);
 // Color-code time blocks based on past, present, or future
 function updateColors() {
     var currentHour = dayjs().hour();
-
+    // parsedInt function is used to convert a string into a numerical value
     $(".container section").each(function() {
         var blockHour = parseInt($(this).find("h2").text().replace("am", "").replace("pm", ""), 10);
 

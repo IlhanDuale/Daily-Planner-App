@@ -61,20 +61,3 @@ function createElement() {
 // Display the current day at the top of the calendar
 var currentDate = dayjs().format("dddd, MMMM D, YYYY");
 $("#currentDay").text(currentDate);
-
-// Color-code time blocks based on past, present, or future
-function updateColors() {
-    var currentHour = dayjs().hour();
-
-    $(".container section").each(function() {
-        var blockHour = parseInt($(this).find("h2").text().replace("am", "").replace("pm", ""), 10);
-
-        if (blockHour < currentHour) {
-            $(this).addClass("past");
-        } else if (blockHour === currentHour) {
-            $(this).addClass("present");
-        } else {
-            $(this).addClass("future");
-        }
-    });
-}

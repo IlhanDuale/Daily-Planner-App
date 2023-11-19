@@ -78,3 +78,32 @@ function updateColors() {
         }
     });
 }
+
+// Allow a user to enter an event when they click a time block
+$(".container").on("click", "section", function() {
+    var existingText = $(this).find("textarea").val();
+    var newText = prompt("Enter your event:", existingText);
+
+    if (newText !== null) {
+        $(this).find("textarea").val(newText);
+        saveTask.call(this); // Save the event to local storage
+        updateColors(); // Update colors after saving the task
+    }
+});
+
+// Load tasks when the page is loaded
+function loadTasks() {
+    $(".container section").each(function() {
+        var blockHour = $(this).find("h2").text();
+        var savedTask = localStorage.getItem(blockHour);
+        $(this).find("textarea").val(savedTask);
+    });
+
+    updateColors(); // Update colors after loading tasks
+}
+
+// Call createElement to generate time blocks
+createElement();
+
+// Load tasks when the page is loaded
+loadTasks();

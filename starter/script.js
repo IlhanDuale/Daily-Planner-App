@@ -58,17 +58,23 @@ function createElement() {
     }
 }
 
-// only strings and functions can be added to jquery elements
+// Display the current day at the top of the calendar
+var currentDate = dayjs().format("dddd, MMMM D, YYYY");
+$("#currentDay").text(currentDate);
 
-// function can be added to jquery elements
-// * Display the current day at the top of the calender when a user opens the planner.
+// Color-code time blocks based on past, present, or future
+function updateColors() {
+    var currentHour = dayjs().hour();
 
-// * Present timeblocks for standard business hours when the user scrolls down.
+    $(".container section").each(function() {
+        var blockHour = parseInt($(this).find("h2").text().replace("am", "").replace("pm", ""), 10);
 
-// * Color-code each timeblock based on past, present, and future when the timeblock is viewed.
-
-// * Allow a user to enter an event when they click a timeblock
-
-// * Save the event in local storage when the save button is clicked in that timeblock.
-
-// * Persist events between refreshes of a page
+        if (blockHour < currentHour) {
+            $(this).addClass("past");
+        } else if (blockHour === currentHour) {
+            $(this).addClass("present");
+        } else {
+            $(this).addClass("future");
+        }
+    });
+}
